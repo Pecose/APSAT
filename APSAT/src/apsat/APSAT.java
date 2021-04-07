@@ -4,8 +4,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -77,14 +75,14 @@ public class APSAT{
 		    }
 		    fReader.close();
 		    bReader.close();
-		    this.trouverAffectationValidePourM();
-		    this.afficherClesValides(); 
+		    this.trouverAffectationsValidePourM();
+		    this.afficherAffectationsValides(); 
 		    timer = (System.nanoTime() - timer) / 1000000000;
 		    System.out.println("Temps écoulé pour traitement des données: "+timer+"s");
 		} catch (Exception e) { e.printStackTrace(); }     
 	}
 	
-	public void trouverAffectationValidePourM() {
+	public void trouverAffectationsValidePourM() {
 		boolean[] k = new boolean[this.nbVariables*2];
 		this.supprimerMdeK(k, 0);
 	}
@@ -119,10 +117,10 @@ public class APSAT{
 		return true;
 	}
 	
-	public void afficherClesValides() {
+	public void afficherAffectationsValides() {
 		StringBuffer buffer = new StringBuffer();
 		System.out.println();
-		System.out.println("Cles Valides:");
+		System.out.println("Affectations Valides:");
 		for(boolean[] k : K){
 			for(int l = 0; l < this.nbVariables*2; l+=2) {
 				if(k[l+1]) {
