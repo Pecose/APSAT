@@ -24,8 +24,7 @@ public class APSAT{
 	public ArrayList<ArrayList<Integer>> P = new ArrayList<ArrayList<Integer>>();
 	public ArrayList<boolean[]> M = new ArrayList<boolean[]>();
 	public ArrayList<boolean[]> K = new ArrayList<boolean[]>();
-//	Scanner scanner = new Scanner(System.in);
-	public long timer;
+	public double timer;
 	
 	public static void main(String[] args) {
 		StringBuffer address = new StringBuffer(args[0]);
@@ -35,9 +34,7 @@ public class APSAT{
 	
 	public APSAT(String adress) {
 		this.address = adress;
-//		System.out.println("Entrez le nombre d'affectations attendu:");
-//		this.nbAffectations = scanner.nextInt();
-		System.out.println("Traitement des données...");
+		System.out.println("c Traitement des données...");
 		this.readFile(address);
 	}
 	
@@ -72,14 +69,12 @@ public class APSAT{
 		    }
 		    fReader.close();
 		    bReader.close();
-		    
-		    
 		    this.rangerP();
 		    this.PtoM();
 		    this.trouverAffectationsValidePourM();
 		    this.afficherAffectationsValides(); 
 		    timer = (System.nanoTime() - timer) / 1000000000;
-		    System.out.println("Temps écoulé pour traitement des données: "+timer+"s");
+		    System.out.println("c Temps écoulé pour traitement des données: "+timer+"s");
 		} catch (Exception e) { e.printStackTrace(); }     
 	}
 
@@ -147,10 +142,10 @@ public class APSAT{
 	
 	public void afficherAffectationsValides() {
 		StringBuffer buffer = new StringBuffer();
-		System.out.println();
 		if(K.size() > 0) {
-			System.out.println("Affectations Valides:");
+			System.out.println("s SATISFIABLE");
 			for(boolean[] k : K){
+				System.out.print("v ");
 				for(int l = 0; l < this.nbVariables*2; l+=2) {
 					if(k[l+1]) {
 						if(k[l]){
@@ -160,13 +155,12 @@ public class APSAT{
 						}
 					}
 				}
-				buffer.append("0 \n");
+				buffer.append("0");
 			}
 			System.out.println(buffer.toString());
 		}else {
-			System.out.println("Aucune affectation Valide");
+			System.out.println("s UNSATISFIABLE");
 		}
 		
 	}
 }
-
